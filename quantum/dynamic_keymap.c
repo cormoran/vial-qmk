@@ -81,6 +81,12 @@ int dynamic_keymap_get_tap_dance(uint8_t index, vial_tap_dance_entry_t *entry) {
 int dynamic_keymap_set_tap_dance(uint8_t index, const vial_tap_dance_entry_t *entry) {
     return nvm_dynamic_keymap_set_tap_dance(index, entry);
 }
+
+__attribute__((weak)) void dynamic_keymap_tap_dance_reset_user(void) {}
+
+__attribute__((weak)) void dynamic_keymap_tap_dance_reset_kb(void) {
+    dynamic_keymap_tap_dance_reset_user();
+}
 #endif
 
 #ifdef VIAL_COMBO_ENABLE
@@ -90,6 +96,12 @@ int dynamic_keymap_get_combo(uint8_t index, vial_combo_entry_t *entry) {
 
 int dynamic_keymap_set_combo(uint8_t index, const vial_combo_entry_t *entry) {
     return nvm_dynamic_keymap_set_combo(index, entry);
+}
+
+__attribute__((weak)) void dynamic_keymap_combo_reset_user(void) {}
+
+__attribute__((weak)) void dynamic_keymap_combo_reset_kb(void) {
+    dynamic_keymap_combo_reset_user();
 }
 #endif
 
@@ -101,6 +113,12 @@ int dynamic_keymap_get_key_override(uint8_t index, vial_key_override_entry_t *en
 int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry_t *entry) {
     return nvm_dynamic_keymap_set_key_override(index, entry);
 }
+
+__attribute__((weak)) void dynamic_keymap_key_override_reset_user(void) {}
+
+__attribute__((weak)) void dynamic_keymap_key_override_reset_kb(void) {
+    dynamic_keymap_key_override_reset_user();
+}
 #endif
 
 #ifdef VIAL_ALT_REPEAT_KEY_ENABLE
@@ -110,6 +128,12 @@ int dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_entry_t
 
 int dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry) {
     return nvm_dynamic_keymap_set_alt_repeat_key(index, entry);
+}
+
+__attribute__((weak)) void dynamic_keymap_alt_repeat_key_reset_user(void) {}
+
+__attribute__((weak)) void dynamic_keymap_alt_repeat_key_reset_kb(void) {
+    dynamic_keymap_alt_repeat_key_reset_user();
 }
 #endif
 
@@ -148,6 +172,7 @@ void dynamic_keymap_reset(void) {
         for (size_t i = 0; i < VIAL_TAP_DANCE_ENTRIES; ++i) {
             dynamic_keymap_set_tap_dance(i, &td);
         }
+        dynamic_keymap_tap_dance_reset_kb();
     }
 #endif
 
@@ -156,6 +181,7 @@ void dynamic_keymap_reset(void) {
         vial_combo_entry_t combo = { 0 };
         for (size_t i = 0; i < VIAL_COMBO_ENTRIES; ++i)
             dynamic_keymap_set_combo(i, &combo);
+        dynamic_keymap_combo_reset_kb();
     }
 #endif
 
@@ -166,6 +192,7 @@ void dynamic_keymap_reset(void) {
         ko.options = vial_ko_option_activation_negative_mod_up | vial_ko_option_activation_required_mod_down | vial_ko_option_activation_trigger_down;
         for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i)
             dynamic_keymap_set_key_override(i, &ko);
+        dynamic_keymap_key_override_reset_kb();
     }
 #endif
 
@@ -174,6 +201,7 @@ void dynamic_keymap_reset(void) {
         vial_alt_repeat_key_entry_t arep = { 0 };
         for (size_t i = 0; i < VIAL_ALT_REPEAT_KEY_ENTRIES; ++i)
             dynamic_keymap_set_alt_repeat_key(i, &arep);
+        dynamic_keymap_alt_repeat_key_reset_kb();
     }
 #endif
 
@@ -223,6 +251,12 @@ void dynamic_keymap_macro_set_buffer(uint16_t offset, uint16_t size, uint8_t *da
     nvm_dynamic_keymap_macro_update_buffer(offset, size, data);
 }
 
+__attribute__((weak)) void dynamic_keymap_macro_reset_user(void) {}
+
+__attribute__((weak)) void dynamic_keymap_macro_reset_kb(void) {
+    dynamic_keymap_macro_reset_user();
+}
+
 static uint8_t dynamic_keymap_read_byte(uint32_t offset) {
     uint8_t d;
     nvm_dynamic_keymap_macro_read_buffer(offset, 1, &d);
@@ -233,6 +267,7 @@ void dynamic_keymap_macro_reset(void) {
     // Erase the macros, if necessary.
     nvm_dynamic_keymap_macro_erase();
     nvm_dynamic_keymap_macro_reset();
+    dynamic_keymap_macro_reset_kb();
 }
 
 static uint16_t decode_keycode(uint16_t kc) {

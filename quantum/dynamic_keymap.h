@@ -44,18 +44,26 @@ void dynamic_keymap_set_qmk_settings(uint16_t offset, uint8_t value);
 #ifdef VIAL_TAP_DANCE_ENABLE
 int dynamic_keymap_get_tap_dance(uint8_t index, vial_tap_dance_entry_t *entry);
 int dynamic_keymap_set_tap_dance(uint8_t index, const vial_tap_dance_entry_t *entry);
+void dynamic_keymap_tap_dance_reset_kb(void);
+void dynamic_keymap_tap_dance_reset_user(void);
 #endif
 #ifdef VIAL_COMBO_ENABLE
 int dynamic_keymap_get_combo(uint8_t index, vial_combo_entry_t *entry);
 int dynamic_keymap_set_combo(uint8_t index, const vial_combo_entry_t *entry);
+void dynamic_keymap_combo_reset_kb(void);
+void dynamic_keymap_combo_reset_user(void);
 #endif
 #ifdef VIAL_KEY_OVERRIDE_ENABLE
 int dynamic_keymap_get_key_override(uint8_t index, vial_key_override_entry_t *entry);
 int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry_t *entry);
+void dynamic_keymap_key_override_reset_kb(void);
+void dynamic_keymap_key_override_reset_user(void);
 #endif
 #ifdef VIAL_ALT_REPEAT_KEY_ENABLE
 int dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_entry_t *entry);
 int dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry);
+void dynamic_keymap_alt_repeat_key_reset_kb(void);
+void dynamic_keymap_alt_repeat_key_reset_user(void);
 #endif
 void     dynamic_keymap_reset(void);
 // These get/set the keycodes as stored in the EEPROM buffer
@@ -97,5 +105,7 @@ uint16_t dynamic_keymap_macro_get_buffer_size(void);
 void     dynamic_keymap_macro_get_buffer(uint16_t offset, uint16_t size, uint8_t *data);
 void     dynamic_keymap_macro_set_buffer(uint16_t offset, uint16_t size, uint8_t *data);
 void     dynamic_keymap_macro_reset(void);
+void     dynamic_keymap_macro_reset_kb(void);
+void     dynamic_keymap_macro_reset_user(void);
 
 void dynamic_keymap_macro_send(uint8_t id);
