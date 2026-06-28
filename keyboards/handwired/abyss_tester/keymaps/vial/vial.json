@@ -1,0 +1,164 @@
+{
+  "name": "abyss-tester-vial",
+  "vendorId": "0xC0DE",
+  "productId": "0xA811",
+  "matrix": {
+    "rows": 6,
+    "cols": 12
+  },
+  "layouts": {
+    "keymap": [
+      [
+        {"x": 0.5, "y": 0.25},
+        "0,0\n\n\n\n\n\n\n\n\ne",
+        {"x": 9},
+        "1,0\n\n\n\n\n\n\n\n\ne"
+      ],
+      ["0,0", "0,1", "0,2", "0,3", "0,4", "0,5", "0,6", "0,7", "0,8", "0,9", "0,10", "0,11"],
+      ["1,0", "1,1", "1,2", "1,3", "1,4", "1,5", "1,6", "1,7", "1,8", "1,9", "1,10", "1,11"],
+      ["2,0", "2,1", "2,2", "2,3", "2,4", "2,5", "2,6", "2,7", "2,8", "2,9", "2,10", "2,11"],
+      ["3,0", "3,1", "3,2", "3,3", "3,4", "3,5", "3,6", "3,7", "3,8", "3,9", "3,10", "3,11"],
+      ["4,0", "4,1", "4,2", {"w": 2}, "4,3", "4,4", "4,5", "4,6", {"w": 2}, "4,7", "4,8", "4,9", "4,10", "4,11"],
+      ["5,0", "5,1", "5,2", "5,3", "5,4", "5,5", "5,6", "5,7", "5,8", "5,9", "5,10", "5,11"]
+    ]
+  },
+  "customKeycodes": [
+    {"name": "Abyss Toggle", "title": "Toggle tester state", "shortName": "A Tog"},
+    {"name": "Abyss Reset", "title": "Reset tester state", "shortName": "A Rst"},
+    {"name": "Abyss Increment", "title": "Increment tester value", "shortName": "A +"},
+    {"name": "Abyss Decrement", "title": "Decrement tester value", "shortName": "A -"},
+    {"name": "Abyss Macro 1", "title": "Send abyss-1", "shortName": "A 1"},
+    {"name": "Abyss Macro 2", "title": "Send abyss-2", "shortName": "A 2"},
+    {"name": "Abyss Macro 3", "title": "Send abyss-3", "shortName": "A 3"},
+    {"name": "Abyss Macro 4", "title": "Send abyss-4", "shortName": "A 4"}
+  ],
+  "menus": [
+    {
+      "label": "Abyss Tester",
+      "content": [
+        {
+          "label": "Primitive Values",
+          "content": [
+            {
+              "label": "Static Text",
+              "content": "Read-only text item for VIA custom UI parsing"
+            },
+            {
+              "label": "Boolean Toggle",
+              "type": "toggle",
+              "content": ["id_abyss_boolean", 0, 0]
+            },
+            {
+              "label": "Byte Range",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_abyss_byte_range", 0, 1]
+            },
+            {
+              "label": "Dropdown",
+              "type": "dropdown",
+              "options": [
+                ["Zero", 0],
+                ["One", 1],
+                ["Two", 2]
+              ],
+              "content": ["id_abyss_dropdown", 0, 2]
+            },
+            {
+              "label": "Keycode",
+              "type": "keycode",
+              "bytes": 2,
+              "content": ["id_abyss_keycode", 0, 3]
+            },
+            {
+              "label": "HSV Color",
+              "type": "color",
+              "content": ["id_abyss_color", 0, 4]
+            },
+            {
+              "label": "Color Palette",
+              "type": "color-palette",
+              "content": ["id_abyss_palette", 0, 8]
+            },
+            {
+              "label": "Word Range",
+              "type": "range",
+              "options": [0, 1023],
+              "bytes": 2,
+              "content": ["id_abyss_word_range", 0, 5]
+            },
+            {
+              "label": "Number Input",
+              "type": "range",
+              "options": [0, 15],
+              "content": ["id_abyss_number", 0, 6]
+            },
+            {
+              "label": "Radio Values",
+              "type": "dropdown",
+              "options": [
+                ["Off", 0],
+                ["On", 1]
+              ],
+              "content": ["id_abyss_radio", 0, 7]
+            }
+          ]
+        },
+        {
+          "label": "Lighting Group",
+          "content": [
+            {
+              "label": "Brightness Slider",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_abyss_brightness", 1, 0]
+            },
+            {
+              "label": "Effect Select",
+              "type": "dropdown",
+              "options": [
+                ["Static", 0],
+                ["Breathing", 1],
+                ["Rainbow", 3]
+              ],
+              "content": ["id_abyss_effect", 1, 1]
+            },
+            {
+              "label": "Speed Integer",
+              "type": "range",
+              "options": [1, 10],
+              "unit": "step",
+              "content": ["id_abyss_speed", 1, 2]
+            },
+            {
+              "label": "Accent Color",
+              "type": "color",
+              "content": ["id_abyss_accent", 1, 3]
+            }
+          ]
+        },
+        {
+          "label": "Actions",
+          "content": [
+            {
+              "label": "Action Button",
+              "type": "button",
+              "content": ["id_abyss_button", 2, 0]
+            },
+            {
+              "label": "Checkbox Alias",
+              "type": "toggle",
+              "content": ["id_abyss_checkbox", 2, 1]
+            },
+            {
+              "label": "Key Binding Alias",
+              "type": "keycode",
+              "bytes": 2,
+              "content": ["id_abyss_secondary_key", 2, 2]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
